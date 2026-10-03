@@ -1,0 +1,60 @@
+{
+  "name": "Campaign ROI Calculator",
+  "agents": {
+    "spend_analyst": "c4c1a29e-74c1-58d7-a8e9-f59915e1ffba",
+    "revenue_analyst": "f7d66870-5a2d-5d7c-8edf-595ef0c4f12a",
+    "report_publisher": "af25951b-fd38-5c1a-a573-f683dadf15b5"
+  },
+  "workflows": {
+    "flow": "4f8cba31-0edb-5888-a307-2f6fa682e460"
+  },
+  "ui": {
+    "title": "Campaign ROI Calculator",
+    "tagline": "Works out what a campaign really returned: pulls spend from your ad platforms and attributed pipeline and revenue from the CRM, calculates ROI, ROAS, CAC and payback in code under your attribution model, explains the result in plain language, and flags campaigns below your ROI target.",
+    "actions": [
+      {
+        "id": "run",
+        "label": "Run: Campaign ROI",
+        "description": "For a campaign and period, Kaman pulls spend from your ad platforms and attributed pipeline and revenue from the CRM in parallel, calculates ROI, ROAS, CAC and payback in code with your attribution model, explains the result, and either publishes the report or flags an under-performing campaign to the marketing lead.",
+        "kind": "workflow",
+        "target": "flow",
+        "inputs": [
+          {
+            "name": "campaign",
+            "label": "Campaign",
+            "kind": "text",
+            "default": "Q3-Refunds-Launch"
+          },
+          {
+            "name": "period_start",
+            "label": "Period start",
+            "kind": "text",
+            "default": "2026-07-01"
+          },
+          {
+            "name": "period_end",
+            "label": "Period end",
+            "kind": "text",
+            "default": "2026-09-30"
+          }
+        ]
+      },
+      {
+        "id": "ask",
+        "label": "Ask the Spend Analyst",
+        "description": "Pulls a campaign's Google Ads spend.",
+        "kind": "agent",
+        "target": "spend_analyst",
+        "prompt": "{{question}}",
+        "inputs": [
+          {
+            "name": "question",
+            "label": "Your question",
+            "kind": "text",
+            "default": "Pull spend for Q3-Refunds-Launch, 2026-07-01 to 2026-09-30."
+          }
+        ]
+      }
+    ]
+  }
+}
